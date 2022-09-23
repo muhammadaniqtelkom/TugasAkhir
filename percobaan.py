@@ -7,53 +7,56 @@ Created on Tue Feb 22 16:08:52 2022
 from libraries import *
 from datetime import datetime
 
+#import file/read .CSV
 
-# =============================================================================
-# DATA_FOLDER = 'data/'
-# filename = 'normal4.csv'
-# judul ="emd_normal_4_soft.csv" 
-# n_times = 1000
-# 
-# 
-# 
-# 
-# 
-# df = pd.read_csv(DATA_FOLDER + filename)
-# 
-# signal = df.iloc[1:,1][:n_times].values.astype("float64")
-# #signal2 = df.iloc[1:,1].values.astype("float64")
-# #x = signal;
-# =============================================================================
+DATA_FOLDER = 'data/'
+filename = 'normal4.csv'
+judul ="emd_normal_4_soft.csv" 
+n_times = 1000
+ 
+ 
+ 
+ 
+ 
+df = pd.read_csv(DATA_FOLDER + filename)
+ 
+signal = df.iloc[1:,1][:n_times].values.astype("float64")
 
 
-# =============================================================================
-# for wav in pywt.wavelist():
-#     try:
-#         filtered = wavelet_denoising(signal, wavelet=wav, level=1)
-#         MSE,SNR = msesnr(signal, filtered)
-#     except:
-#         pass
-#     
-# =============================================================================
+
+
+#Denoising signal Using DWT with varian Wavelet
+ for wav in pywt.wavelist():
+     try:
+         filtered = wavelet_denoising(signal, wavelet=wav, level=1)
+         MSE,SNR = msesnr(signal, filtered)
+     except:
+        pass
+     
     
-# =============================================================================
-#     plt.figure(figsize=(10, 6))
-#     plt.plot(signal, label='Raw')
-#     plt.plot(filtered, label='Filtered')
-#     plt.legend()
-#     plt.title(f"DWT Denoising with {wav} Wavelet", size=15)
-#     plt.show()
-# =============================================================================
-# =============================================================================
-#     yable =[]
-#     print('wavelet: ',wav)
-#     print('SNR: ',SNR)
-#     print('MSE: ',MSE)
-#     yable.append(wav)
-#     yable.append(SNR)
-#     yable.append(MSE)
-#     table.append(yable)
-# =============================================================================
+#ploting denosing signal and calculate SNR $ MSE
+     plt.figure(figsize=(10, 6))
+     plt.plot(signal, label='Raw')
+     plt.plot(filtered, label='Filtered')
+     plt.legend()
+     plt.title(f"DWT Denoising with {wav} Wavelet", size=15)
+    plt.show()
+
+
+yable =[]
+print('wavelet: ',wav)
+print('SNR: ',SNR)
+print('MSE: ',MSE)
+yable.append(wav)
+yable.append(SNR)
+yable.append(MSE)
+table.append(yable)
+
+
+#eksport to CSV
+listtocsv(X,"%s.CSV"%(file))
+
+listtocsv(table,judul)
 
 # =============================================================================
 # # Get the default configuration for a sift
@@ -130,12 +133,12 @@ from datetime import datetime
 # print('MSE_soft: ',MSE2)
 # =============================================================================
 
+#denosing using EMD with variant threshold
 
-# =============================================================================
-# imf = emd.sift.sift(x)
-# residual = imf[0:, 7]
-# entropy1 = entropy(residual, base=10)
-# =============================================================================
+imf = emd.sift.sift(x)
+residual = imf[0:, 7]
+entropy1 = entropy(residual, base=10)
+
 # =============================================================================
 # y = imf[0:,1]
 # plt.figure()
@@ -147,29 +150,31 @@ from datetime import datetime
 # plt.xticks([])
 # =============================================================================
 
-# =============================================================================
-# threshold = [0.1 ,0.2 ,0.3 ,0.4 ,0.5 ,0.6 ,0.7 ,0.8 ,0.9]
-# threshold1 = [1 ,2 ,3 ,4 ,5 ,6 ,7 ,8 ,9]
-# denoisedata = []
-# for i in threshold1:
-#     try:
-#         filtered = denoising_emd(signal, i, 'soft')
-#         
-#         
-#     except:
-#         pass
-#     
-#     MSE,SNR = msesnr(signal, filtered)
-#     ytable = []
-#     ytable.append(MSE)
-#     ytable.append(SNR)
-#     ytable.append(i)
-#     denoisedata.append(ytable)
-#     
-#   
-# 
-# =============================================================================
-# =============================================================================
+#denoising data Using EMD with variant Threshold
+
+ threshold1 = [1 ,2 ,3 ,4 ,5 ,6 ,7 ,8 ,9]
+ denoisedata = []
+ for i in threshold1:
+     try:
+         filtered = denoising_emd(signal, i, 'soft')
+         
+         
+     except:
+         pass
+     
+     MSE,SNR = msesnr(signal, filtered)
+     ytable = []
+     ytable.append(MSE)
+     ytable.append(SNR)
+     ytable.append(i)
+     denoisedata.append(ytable)
+     
+ #eksport to CSV
+listtocsv(X,"%s.CSV"%(file))
+
+listtocsv(table,judul) 
+
+#impor signal
 # folder = 'fitur_DWT'
 # file = 'fixedPatient1'
 # folderanotasi = 'anotasi'
