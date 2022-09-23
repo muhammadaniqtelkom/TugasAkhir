@@ -90,9 +90,11 @@ n_times = 4665
 # svm.SVC()
 # =============================================================================
 ppg_signal, ppg_anotation = annotation_to_ppg_signal_labeled(folder,folderanotasi,file)#####labeling raw signal
-ppg_signal, ppg_anotation = annotation_to_ppg_signal_labeled2(folder,folderanotasi,file,n_times)#####denoising sinal using DWT and do labeling
-ppg_signal, ppg_anotation = annotation_to_ppg_signal_labeled3(folder,folderanotasi,file,n_times)#####denoising sinal using EMD and do labeling
-X, y = get_ppg_features(ppg_signal, ppg_anotation, 'bior3.9')#feature Extraction
+ppg_signal, ppg_anotation = annotation_to_ppg_signal_labeled2(folder,folderanotasi,file,n_times)#####denoising signal using DWT and do labeling
+ppg_signal, ppg_anotation = annotation_to_ppg_signal_labeled3(folder,folderanotasi,file,n_times)#####denoising signal using EMD and do labeling
+
+
+X, y = get_ppg_features(ppg_signal, ppg_anotation, 'bior3.9')#######feature Extraction
 
 
 ######feature Extraction from specific file
