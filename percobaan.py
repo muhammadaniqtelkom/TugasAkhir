@@ -110,8 +110,10 @@ path = 'fitur_asli'
 all_files = glob.glob(path + "/*.csv")
 anotasipath = 'anotasi'
 all_anotasi = glob.glob(anotasipath + "/*.csv")
-model = DecisionTreeClassifier()
-model1 = svm.SVC(kernel='linear')
+
+
+
+model = svm.SVC(kernel='linear')
 li =[]
 li1 = []
 # =============================================================================
