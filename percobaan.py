@@ -4,6 +4,19 @@ Created on Tue Feb 22 16:08:52 2022
 
 @author: mBergudeng
 """
+
+
+###--------petunjuk-------------------
+#run NO 1 untuk Import file .CSV
+#run NO 2 untuk percobaan Denoising
+    #2A untuk metode DWT
+    #2B untuk metode EMD
+#run NO 3 untuk labeling dan fitur ekstraksi
+#run NO 4 untuk uji klasifikasi
+###------------------------------------
+
+
+
 from libraries import *
 from datetime import datetime
 
