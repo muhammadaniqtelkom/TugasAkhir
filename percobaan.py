@@ -7,15 +7,15 @@ Created on Tue Feb 22 16:08:52 2022
 from libraries import *
 from datetime import datetime
 
+
+#---------------------------------------------------------------
+                            #1 Import File#
+
 #####Import File CSV
 DATA_FOLDER = 'data/'
 filename = 'normal4.csv'
 judul ="emd_normal_4_soft.csv" 
 n_times = 1000
-
-
-
-
 
 df = pd.read_csv(DATA_FOLDER + filename)
 
@@ -23,6 +23,9 @@ signal = df.iloc[1:,1][:n_times].values.astype("float64")
 #signal2 = df.iloc[1:,1].values.astype("float64")
 #x = signal;
 
+#---------------------------------------------------------------
+                            #2 Denoising#
+                #2A Denoising DWT
 #####denoising using DWT with variant Wavlete
 for wav in pywt.wavelist():
     try:
@@ -52,10 +55,14 @@ for wav in pywt.wavelist():
     yable.append(MSE)
     table.append(yable)
 
-listtocsv(denoisedata,"EMDdenoisedfile")
+listtocsv(denoisedata,"DWTdenoisedfile")
+#------------
 
 
 
+#------------
+                    #2B
+    
 ######Denoising using EMD with variant Threshold
 threshold = [0.1 ,0.2 ,0.3 ,0.4 ,0.5 ,0.6 ,0.7 ,0.8 ,0.9]
 threshold1 = [1 ,2 ,3 ,4 ,5 ,6 ,7 ,8 ,9]
@@ -79,7 +86,13 @@ for i in threshold1:
     
   
 listtocsv(denoisedata,"EMDdenoisedfile")
+#----------------------------------------------------------
 
+
+
+#-----------------------------------------------------------
+                     #3 labeling dan fitur ekstraksi#
+    
 ######import signal, labeling, and cutting
 folder = 'fitur_DWT'
 file = 'fixedPatient1'
@@ -111,8 +124,12 @@ all_files = glob.glob(path + "/*.csv")
 anotasipath = 'anotasi'
 all_anotasi = glob.glob(anotasipath + "/*.csv")
 
+#-----------------------------------------------------------------------------
 
 
+#-----------------------------------------------------------------------------
+                        #4 klasifikasi dari file yang disimpan#
+    
 model = svm.SVC(kernel='linear')
 li =[]
 li1 = []
@@ -139,3 +156,4 @@ for filename1 in all_anotasi:
 labeltest = "pvc"
 X_train, X_test, y_train, y_test = train_test_split(frame, li1, test_size=0.20 , random_state=42)
 z = run_experiment(model, X_train, y_train, X_test, y_test, labeltest)
+#-------------------------------------------------------------------------------------------------
